@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -75,6 +77,20 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   bool _male = true;
+  int _weight = 74;
+  int _age = 19;
+
+  void _handleWeightChange(int change) {
+    setState(() {
+      _weight = min(max(0, _weight + change), 200);
+    });
+  }
+
+  void _handleAgeChange(int change) {
+    setState(() {
+      _age = min(max(0, _age + change), 100);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +126,19 @@ class _InputPageState extends State<InputPage> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: StepperCard(title: 'WEIGHT'),
+                        child: StepperCard(
+                          title: 'WEIGHT',
+                          value: _weight,
+                          onChange: _handleWeightChange,
+                        ),
                       ),
                       SizedBox(width: 5),
                       Expanded(
-                        child: StepperCard(title: 'AGE'),
+                        child: StepperCard(
+                          title: 'AGE',
+                          value: _age,
+                          onChange: _handleAgeChange,
+                        ),
                       ),
                     ],
                   ),
@@ -134,9 +158,13 @@ class StepperCard extends StatelessWidget {
   const StepperCard({
     Key key,
     @required this.title,
+    @required this.value,
+    @required this.onChange,
   }) : super(key: key);
 
   final String title;
+  final int value;
+  final Function onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -144,28 +172,35 @@ class StepperCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(title, style: Theme.of(context).textTheme.body1),
-            Text('74', style: Theme.of(context).textTheme.display1),
+            Text(value.toString(), style: Theme.of(context).textTheme.display1),
+            Expanded(child: Container()),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: Icon(Icons.arrow_downward, color: BmiColors.grey),
-                  constraints: BoxConstraints.tight(Size.square(56)),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).accentColor,
+                GestureDetector(
+                  onTap: () => onChange(-1),
+                  child: Container(
+                    child: Icon(Icons.arrow_downward, color: BmiColors.grey),
+                    constraints: BoxConstraints.tight(Size.square(56)),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                 ),
                 SizedBox(width: 12),
-                Container(
-                  child: Icon(Icons.arrow_upward, color: BmiColors.grey),
-                  constraints: BoxConstraints.tight(Size.square(54)),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).accentColor,
+                GestureDetector(
+                  onTap: () => onChange(1),
+                  child: Container(
+                    child: Icon(Icons.arrow_upward, color: BmiColors.grey),
+                    constraints: BoxConstraints.tight(Size.square(54)),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                 ),
               ],
