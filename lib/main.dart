@@ -32,13 +32,13 @@ class BMICalculator extends StatelessWidget {
             fontSize: 16,
             color: BmiColors.grey,
             fontWeight: FontWeight.bold,
-            letterSpacing: 0.6,
+            letterSpacing: 1,
           ),
           body2: TextStyle(
             fontSize: 16,
             color: BmiColors.white,
             fontWeight: FontWeight.bold,
-            letterSpacing: 0.6,
+            letterSpacing: 1,
           ),
         ),
       ),
@@ -146,15 +146,23 @@ class GenderSwitcher extends StatelessWidget {
           child: GestureDetector(
             onTap: () => onSwitch(true),
             child: widgets.Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Bmi.male),
-                  Text(
-                    'MALE',
-                    style: male ? body2 : body1,
-                  ),
-                ],
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(
+                      Bmi.male,
+                      size: 56,
+                      color: male ? BmiColors.white : BmiColors.grey,
+                    ),
+                    Text(
+                      'MALE',
+                      style: male ? body2 : body1,
+                    ),
+                  ],
+                ),
               ),
               color: Theme.of(context).accentColor,
             ),
@@ -165,15 +173,23 @@ class GenderSwitcher extends StatelessWidget {
           child: GestureDetector(
             onTap: () => onSwitch(false),
             child: widgets.Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Bmi.female),
-                  Text(
-                    'FEMALE',
-                    style: male ? body1 : body2,
-                  ),
-                ],
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(
+                      Bmi.female,
+                      size: 56,
+                      color: male ? BmiColors.grey : BmiColors.white,
+                    ),
+                    Text(
+                      'FEMALE',
+                      style: male ? body1 : body2,
+                    ),
+                  ],
+                ),
               ),
               color: Theme.of(context).accentColor,
             ),

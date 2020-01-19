@@ -65,7 +65,6 @@ class Card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 24),
       constraints: BoxConstraints.expand(),
       decoration: BoxDecoration(
         color: color ?? Theme.of(context).cardColor,
