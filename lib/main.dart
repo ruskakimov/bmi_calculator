@@ -40,6 +40,11 @@ class BMICalculator extends StatelessWidget {
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
           ),
+          display1: TextStyle(
+            fontSize: 50,
+            color: BmiColors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       home: Stack(
@@ -105,11 +110,11 @@ class _InputPageState extends State<InputPage> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: widgets.Card(),
+                        child: StepperCard(title: 'WEIGHT'),
                       ),
                       SizedBox(width: 5),
                       Expanded(
-                        child: widgets.Card(),
+                        child: StepperCard(title: 'AGE'),
                       ),
                     ],
                   ),
@@ -121,6 +126,53 @@ class _InputPageState extends State<InputPage> {
         ),
         widgets.PrimaryButton('CALCULATE YOUR BMI'),
       ],
+    );
+  }
+}
+
+class StepperCard extends StatelessWidget {
+  const StepperCard({
+    Key key,
+    @required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return widgets.Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(title, style: Theme.of(context).textTheme.body1),
+            Text('74', style: Theme.of(context).textTheme.display1),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child: Icon(Icons.arrow_downward, color: BmiColors.grey),
+                  constraints: BoxConstraints.tight(Size.square(56)),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                SizedBox(width: 12),
+                Container(
+                  child: Icon(Icons.arrow_upward, color: BmiColors.grey),
+                  constraints: BoxConstraints.tight(Size.square(54)),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
