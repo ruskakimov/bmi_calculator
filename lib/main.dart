@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'colors.dart';
+import 'bmi_icons.dart';
 import 'widgets.dart' as widgets;
 
 void main() {
   runApp(BMICalculator());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
     statusBarColor: Colors.transparent,
@@ -30,29 +32,29 @@ class BMICalculator extends StatelessWidget {
             fontSize: 16,
             color: BmiColors.grey,
             fontWeight: FontWeight.bold,
-            letterSpacing: 0.5,
+            letterSpacing: 0.6,
           ),
           body2: TextStyle(
             fontSize: 16,
             color: BmiColors.white,
             fontWeight: FontWeight.bold,
-            letterSpacing: 0.5,
+            letterSpacing: 0.6,
           ),
         ),
       ),
       home: Stack(
         children: <Widget>[
-          Scaffold(
-            appBar: widgets.AppBar('BMI CALCULATOR'),
-            body: InputPage(),
+          Image(
+            image: AssetImage('images/selector_page.png'),
+            alignment: Alignment.bottomCenter,
+            width: double.infinity,
+            fit: BoxFit.contain,
           ),
           Opacity(
-            opacity: 0,
-            child: Image(
-              image: AssetImage('images/selector_page.png'),
-              alignment: Alignment.bottomCenter,
-              width: double.infinity,
-              fit: BoxFit.contain,
+            opacity: 1,
+            child: Scaffold(
+              appBar: widgets.AppBar('BMI CALCULATOR'),
+              body: InputPage(),
             ),
           ),
         ],
@@ -73,21 +75,6 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            print('works');
-          },
-          child: Container(
-            color: Colors.red,
-            height: 100,
-            width: 200,
-          ),
-        ),
-        RaisedButton(
-          onPressed: () {
-            print('lol');
-          },
-        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -155,29 +142,14 @@ class GenderSwitcher extends StatelessWidget {
 
     return Row(
       children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            print('works');
-          },
-          child: Container(
-            color: Colors.red,
-            height: 200,
-            width: 200,
-          ),
-        ),
         Expanded(
           child: GestureDetector(
-            onTapDown: (_) {
-              print('down!');
-            },
-            onTap: () {
-              print('tap male');
-              onSwitch(true);
-            },
+            onTap: () => onSwitch(true),
             child: widgets.Card(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  Icon(Bmi.male),
                   Text(
                     'MALE',
                     style: male ? body2 : body1,
@@ -196,6 +168,7 @@ class GenderSwitcher extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  Icon(Bmi.female),
                   Text(
                     'FEMALE',
                     style: male ? body1 : body2,
