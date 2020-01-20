@@ -78,6 +78,7 @@ class _InputPageState extends State<InputPage> {
   bool _male = true;
   int _weight = 74;
   int _age = 19;
+  int _height = 175;
 
   void _handleWeightChange(int change) {
     setState(() {
@@ -88,6 +89,12 @@ class _InputPageState extends State<InputPage> {
   void _handleAgeChange(int change) {
     setState(() {
       _age = min(max(0, _age + change), 100);
+    });
+  }
+
+  void _handleHeightChange(double newHeight) {
+    setState(() {
+      _height = newHeight.toInt();
     });
   }
 
@@ -116,7 +123,12 @@ class _InputPageState extends State<InputPage> {
                 SizedBox(height: 24),
                 Expanded(
                   flex: 8,
-                  child: widgets.Card(),
+                  child: HeightCard(
+                    value: _height,
+                    onChange: _handleHeightChange,
+                    min: 125,
+                    max: 225,
+                  ),
                 ),
                 SizedBox(height: 24),
                 Expanded(
@@ -148,6 +160,44 @@ class _InputPageState extends State<InputPage> {
         ),
         widgets.PrimaryButton('CALCULATE YOUR BMI'),
       ],
+    );
+  }
+}
+
+class HeightCard extends StatelessWidget {
+  const HeightCard({
+    Key key,
+    @required this.value,
+    @required this.onChange,
+    @required this.min,
+    @required this.max,
+  }) : super(key: key);
+
+  final int value;
+  final int min;
+  final int max;
+  final Function onChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return widgets.Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        child: Column(
+          children: <Widget>[
+            Text('HEIGHT', style: Theme.of(context).textTheme.body1),
+            SizedBox(height: 2),
+            Text(value.toString(), style: Theme.of(context).textTheme.display1),
+            Expanded(child: Container()),
+            Slider(
+              value: value.toDouble(),
+              onChanged: (newHeight) => onChange(newHeight),
+              min: min.toDouble(),
+              max: max.toDouble(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
