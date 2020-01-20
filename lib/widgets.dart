@@ -196,34 +196,14 @@ class GenderSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final body1 = Theme.of(context).textTheme.body1;
-    final body2 = Theme.of(context).textTheme.body2;
-
     return Row(
       children: <Widget>[
         Expanded(
           child: GestureDetector(
             onTap: () => onSwitch(true),
-            child: Card(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Icon(
-                      Bmi.male,
-                      size: 56,
-                      color: male ? BmiColors.white : BmiColors.grey,
-                    ),
-                    Text(
-                      'MALE',
-                      style: male ? body2 : body1,
-                    ),
-                  ],
-                ),
-              ),
-              color: Theme.of(context).accentColor,
+            child: GenderCard(
+              title: 'MALE',
+              isSelected: male,
             ),
           ),
         ),
@@ -231,30 +211,52 @@ class GenderSwitcher extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: () => onSwitch(false),
-            child: Card(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Icon(
-                      Bmi.female,
-                      size: 56,
-                      color: male ? BmiColors.grey : BmiColors.white,
-                    ),
-                    Text(
-                      'FEMALE',
-                      style: male ? body1 : body2,
-                    ),
-                  ],
-                ),
-              ),
-              color: Theme.of(context).accentColor,
+            child: GenderCard(
+              title: 'FEMALE',
+              isSelected: !male,
             ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class GenderCard extends StatelessWidget {
+  const GenderCard({
+    Key key,
+    @required this.title,
+    @required this.isSelected,
+  }) : super(key: key);
+
+  final String title;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final body1 = Theme.of(context).textTheme.body1;
+    final body2 = Theme.of(context).textTheme.body2;
+
+    return Card(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Icon(
+              Bmi.male,
+              size: 56,
+              color: isSelected ? BmiColors.white : BmiColors.grey,
+            ),
+            Text(
+              title,
+              style: isSelected ? body2 : body1,
+            ),
+          ],
+        ),
+      ),
+      color: Theme.of(context).accentColor,
     );
   }
 }
