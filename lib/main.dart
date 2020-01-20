@@ -104,7 +104,7 @@ class _InputPageState extends State<InputPage> {
       children: <Widget>[
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -194,6 +194,8 @@ class HeightCard extends StatelessWidget {
               onChanged: (newHeight) => onChange(newHeight),
               min: min.toDouble(),
               max: max.toDouble(),
+              activeColor: BmiColors.pink,
+              inactiveColor: BmiColors.blue3,
             ),
           ],
         ),
