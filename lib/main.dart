@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'colors.dart';
-import 'bmi_icons.dart';
 import 'widgets.dart' as widgets;
 
 void main() {
@@ -13,7 +12,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
     statusBarColor: Colors.transparent,
-    systemNavigationBarColor: Color(0xFF0A0D22),
+    systemNavigationBarColor: Colors.black,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 }
@@ -105,10 +104,9 @@ class _InputPageState extends State<InputPage> {
                 SizedBox(height: 30),
                 Expanded(
                   flex: 6,
-                  child: GenderSwitcher(
+                  child: widgets.GenderSwitcher(
                     male: _male,
                     onSwitch: (male) {
-                      print(male);
                       setState(() {
                         _male = male;
                       });
@@ -126,7 +124,7 @@ class _InputPageState extends State<InputPage> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: StepperCard(
+                        child: widgets.StepperCard(
                           title: 'WEIGHT',
                           value: _weight,
                           onChange: _handleWeightChange,
@@ -134,7 +132,7 @@ class _InputPageState extends State<InputPage> {
                       ),
                       SizedBox(width: 5),
                       Expanded(
-                        child: StepperCard(
+                        child: widgets.StepperCard(
                           title: 'AGE',
                           value: _age,
                           onChange: _handleAgeChange,
@@ -149,139 +147,6 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
         widgets.PrimaryButton('CALCULATE YOUR BMI'),
-      ],
-    );
-  }
-}
-
-class StepperCard extends StatelessWidget {
-  const StepperCard({
-    Key key,
-    @required this.title,
-    @required this.value,
-    @required this.onChange,
-  }) : super(key: key);
-
-  final String title;
-  final int value;
-  final Function onChange;
-
-  @override
-  Widget build(BuildContext context) {
-    return widgets.Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(title, style: Theme.of(context).textTheme.body1),
-            Text(value.toString(), style: Theme.of(context).textTheme.display1),
-            Expanded(child: Container()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => onChange(-1),
-                  child: Container(
-                    child: Icon(Icons.arrow_downward, color: BmiColors.grey),
-                    constraints: BoxConstraints.tight(Size.square(56)),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 12),
-                GestureDetector(
-                  onTap: () => onChange(1),
-                  child: Container(
-                    child: Icon(Icons.arrow_upward, color: BmiColors.grey),
-                    constraints: BoxConstraints.tight(Size.square(54)),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class GenderSwitcher extends StatelessWidget {
-  const GenderSwitcher({
-    Key key,
-    this.male = true,
-    @required this.onSwitch,
-  }) : super(key: key);
-
-  final bool male;
-  final Function onSwitch;
-
-  @override
-  Widget build(BuildContext context) {
-    final body1 = Theme.of(context).textTheme.body1;
-    final body2 = Theme.of(context).textTheme.body2;
-
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: GestureDetector(
-            onTap: () => onSwitch(true),
-            child: widgets.Card(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Icon(
-                      Bmi.male,
-                      size: 56,
-                      color: male ? BmiColors.white : BmiColors.grey,
-                    ),
-                    Text(
-                      'MALE',
-                      style: male ? body2 : body1,
-                    ),
-                  ],
-                ),
-              ),
-              color: Theme.of(context).accentColor,
-            ),
-          ),
-        ),
-        SizedBox(width: 5),
-        Expanded(
-          child: GestureDetector(
-            onTap: () => onSwitch(false),
-            child: widgets.Card(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Icon(
-                      Bmi.female,
-                      size: 56,
-                      color: male ? BmiColors.grey : BmiColors.white,
-                    ),
-                    Text(
-                      'FEMALE',
-                      style: male ? body1 : body2,
-                    ),
-                  ],
-                ),
-              ),
-              color: Theme.of(context).accentColor,
-            ),
-          ),
-        ),
       ],
     );
   }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+import 'bmi_icons.dart';
+
 class AppBar extends StatelessWidget implements PreferredSizeWidget {
   const AppBar(this.title, {Key key})
       : preferredSize = const Size.fromHeight(90),
@@ -71,6 +74,187 @@ class Card extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: child,
+    );
+  }
+}
+
+class StepperCard extends StatelessWidget {
+  const StepperCard({
+    Key key,
+    @required this.title,
+    @required this.value,
+    @required this.onChange,
+  }) : super(key: key);
+
+  final String title;
+  final int value;
+  final Function onChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(title, style: Theme.of(context).textTheme.body1),
+            SizedBox(height: 2),
+            Text(value.toString(), style: Theme.of(context).textTheme.display1),
+            Expanded(child: Container()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () => onChange(-1),
+                  child: Container(
+                    child: Minus(),
+                    constraints: BoxConstraints.tight(Size.square(56)),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                GestureDetector(
+                  onTap: () => onChange(1),
+                  child: Container(
+                    child: Plus(),
+                    constraints: BoxConstraints.tight(Size.square(54)),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Minus extends StatelessWidget {
+  const Minus({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: RotatedBox(
+        quarterTurns: 1,
+        child: Container(
+          constraints: BoxConstraints.tight(Size(2, 20)),
+          color: BmiColors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class Plus extends StatelessWidget {
+  const Plus({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          RotatedBox(
+            quarterTurns: 1,
+            child: Container(
+              constraints: BoxConstraints.tight(Size(2, 20)),
+              color: BmiColors.white,
+            ),
+          ),
+          Container(
+            constraints: BoxConstraints.tight(Size(2, 20)),
+            color: BmiColors.white,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class GenderSwitcher extends StatelessWidget {
+  const GenderSwitcher({
+    Key key,
+    this.male = true,
+    @required this.onSwitch,
+  }) : super(key: key);
+
+  final bool male;
+  final Function onSwitch;
+
+  @override
+  Widget build(BuildContext context) {
+    final body1 = Theme.of(context).textTheme.body1;
+    final body2 = Theme.of(context).textTheme.body2;
+
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: GestureDetector(
+            onTap: () => onSwitch(true),
+            child: Card(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(
+                      Bmi.male,
+                      size: 56,
+                      color: male ? BmiColors.white : BmiColors.grey,
+                    ),
+                    Text(
+                      'MALE',
+                      style: male ? body2 : body1,
+                    ),
+                  ],
+                ),
+              ),
+              color: Theme.of(context).accentColor,
+            ),
+          ),
+        ),
+        SizedBox(width: 5),
+        Expanded(
+          child: GestureDetector(
+            onTap: () => onSwitch(false),
+            child: Card(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(
+                      Bmi.female,
+                      size: 56,
+                      color: male ? BmiColors.grey : BmiColors.white,
+                    ),
+                    Text(
+                      'FEMALE',
+                      style: male ? body1 : body2,
+                    ),
+                  ],
+                ),
+              ),
+              color: Theme.of(context).accentColor,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
