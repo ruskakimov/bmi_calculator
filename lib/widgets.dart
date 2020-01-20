@@ -202,7 +202,7 @@ class GenderSwitcher extends StatelessWidget {
           child: GestureDetector(
             onTap: () => onSwitch(true),
             child: GenderCard(
-              title: 'MALE',
+              isMale: true,
               isSelected: male,
             ),
           ),
@@ -212,7 +212,7 @@ class GenderSwitcher extends StatelessWidget {
           child: GestureDetector(
             onTap: () => onSwitch(false),
             child: GenderCard(
-              title: 'FEMALE',
+              isMale: false,
               isSelected: !male,
             ),
           ),
@@ -225,11 +225,11 @@ class GenderSwitcher extends StatelessWidget {
 class GenderCard extends StatelessWidget {
   const GenderCard({
     Key key,
-    @required this.title,
+    @required this.isMale,
     @required this.isSelected,
   }) : super(key: key);
 
-  final String title;
+  final bool isMale;
   final bool isSelected;
 
   @override
@@ -245,12 +245,12 @@ class GenderCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Icon(
-              Bmi.male,
+              isMale ? Bmi.male : Bmi.female,
               size: 56,
               color: isSelected ? BmiColors.white : BmiColors.grey,
             ),
             Text(
-              title,
+              isMale ? 'MALE' : 'FEMALE',
               style: isSelected ? body2 : body1,
             ),
           ],
