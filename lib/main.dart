@@ -27,7 +27,16 @@ class BMICalculator extends StatelessWidget {
         primaryColor: BmiColors.pink,
         highlightColor: BmiColors.white,
         textTheme: TextTheme(
-          title: TextStyle(fontSize: 16, color: BmiColors.white),
+          title: TextStyle(
+            fontSize: 16,
+            color: BmiColors.white,
+            letterSpacing: 0.5,
+          ),
+          button: TextStyle(
+            fontSize: 16,
+            color: BmiColors.white,
+            letterSpacing: 2,
+          ),
           body1: TextStyle(
             fontSize: 16,
             color: BmiColors.grey,
@@ -56,7 +65,7 @@ class BMICalculator extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           Opacity(
-            opacity: 1,
+            opacity: 0.5,
             child: Scaffold(
               appBar: widgets.AppBar('BMI CALCULATOR'),
               body: InputPage(),

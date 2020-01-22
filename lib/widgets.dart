@@ -34,9 +34,9 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
-    this.value,
-    this.onPress, {
+    this.value, {
     Key key,
+    this.onPress,
   }) : super(key: key);
 
   final String value;

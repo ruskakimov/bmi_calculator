@@ -123,14 +123,29 @@ class HeightCard extends StatelessWidget {
           children: <Widget>[
             Text('HEIGHT', style: Theme.of(context).textTheme.body1),
             SizedBox(height: 2),
-            Text(value.toString(), style: Theme.of(context).textTheme.display1),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: <Widget>[
+                Text(value.toString(),
+                    style: Theme.of(context).textTheme.display1),
+                Text(
+                  'cm',
+                  style: Theme.of(context)
+                      .textTheme
+                      .body1
+                      .copyWith(fontSize: 20, fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
             Expanded(child: Container()),
             SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 thumbColor: BmiColors.pink,
                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
                 overlayColor: BmiColors.pink.withAlpha(38),
-                overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 24),
                 activeTrackColor: BmiColors.white,
                 inactiveTrackColor: BmiColors.grey,
               ),
@@ -139,8 +154,6 @@ class HeightCard extends StatelessWidget {
                 onChanged: (newHeight) => onChange(newHeight),
                 min: min.toDouble(),
                 max: max.toDouble(),
-                // activeColor: BmiColors.pink,
-                // inactiveColor: BmiColors.blue3,
               ),
             ),
           ],
