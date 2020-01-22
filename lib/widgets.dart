@@ -34,21 +34,26 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
-    this.value, {
+    this.value,
+    this.onPress, {
     Key key,
   }) : super(key: key);
 
   final String value;
+  final Function onPress;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).primaryColor,
-      constraints: BoxConstraints.expand(height: 70),
-      child: Center(
-        child: Text(
-          value,
-          style: Theme.of(context).textTheme.title,
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        color: Theme.of(context).primaryColor,
+        constraints: BoxConstraints.expand(height: 70),
+        child: Center(
+          child: Text(
+            value,
+            style: Theme.of(context).textTheme.title,
+          ),
         ),
       ),
     );
