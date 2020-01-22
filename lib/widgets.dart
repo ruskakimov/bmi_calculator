@@ -52,7 +52,7 @@ class PrimaryButton extends StatelessWidget {
         child: Center(
           child: Text(
             value,
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.button,
           ),
         ),
       ),

@@ -65,7 +65,7 @@ class BMICalculator extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           Opacity(
-            opacity: 0.5,
+            opacity: 1,
             child: Scaffold(
               appBar: widgets.AppBar('BMI CALCULATOR'),
               body: InputPage(),

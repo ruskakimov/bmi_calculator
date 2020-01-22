@@ -145,7 +145,7 @@ class HeightCard extends StatelessWidget {
                 thumbColor: BmiColors.pink,
                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
                 overlayColor: BmiColors.pink.withAlpha(38),
-                overlayShape: RoundSliderOverlayShape(overlayRadius: 24),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
                 activeTrackColor: BmiColors.white,
                 inactiveTrackColor: BmiColors.grey,
               ),
