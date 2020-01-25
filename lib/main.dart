@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'input_page.dart';
 import 'colors.dart';
-import 'widgets.dart' as widgets;
+import 'input_page.dart';
+import 'result_page.dart';
 
 void main() {
   runApp(BMICalculator());
@@ -40,14 +40,12 @@ class BMICalculator extends StatelessWidget {
           body1: TextStyle(
             fontSize: 16,
             color: BmiColors.grey,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
+            letterSpacing: 0.5,
           ),
           body2: TextStyle(
             fontSize: 16,
             color: BmiColors.white,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
+            letterSpacing: 0.5,
           ),
           display1: TextStyle(
             fontSize: 50,
@@ -61,16 +59,6 @@ class BMICalculator extends StatelessWidget {
         '/': (context) => InputPage(),
         'result': (context) => ResultPage(),
       },
-    );
-  }
-}
-
-class ResultPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: widgets.CustomAppBar('RESULT'),
-      body: Text('yo'),
     );
   }
 }

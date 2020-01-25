@@ -7,4 +7,5 @@ class BmiColors {
   static const pink = const Color(0xFFEB1555);
   static const grey = const Color(0x80FFFFFF);
   static const white = const Color(0xFFFFFFFF);
+  static const green = const Color(0xFF22E67B);
 }
