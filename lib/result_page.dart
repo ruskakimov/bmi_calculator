@@ -5,6 +5,120 @@ import 'package:flutter/material.dart';
 import 'widgets.dart' as widgets;
 import 'colors.dart';
 
+// Data is from here
+// https://www.cdc.gov/healthyweight/assessing/bmi/childrens_bmi/about_childrens_bmi.html
+// bmi for 5, 85, 95 percentile
+const boys = [
+  {
+    'age': 2,
+    '5th': 14.8,
+    '85th': 18.2,
+    '95th': 19.4,
+  },
+  {
+    'age': 3,
+    '5th': 14.4,
+    '85th': 17.4,
+    '95th': 18.2,
+  },
+  {
+    'age': 4,
+    '5th': 14,
+    '85th': 17,
+    '95th': 17.8,
+  },
+  {
+    'age': 5,
+    '5th': 13.8,
+    '85th': 16.8,
+    '95th': 18,
+  },
+  {
+    'age': 6,
+    '5th': 13.8,
+    '85th': 17,
+    '95th': 18.4,
+  },
+  {
+    'age': 7,
+    '5th': 13.8,
+    '85th': 17.4,
+    '95th': 19.2,
+  },
+  {
+    'age': 8,
+    '5th': 13.8,
+    '85th': 18,
+    '95th': 20,
+  },
+  {
+    'age': 9,
+    '5th': 14,
+    '85th': 18.6,
+    '95th': 21,
+  },
+  {
+    'age': 10,
+    '5th': 14.2,
+    '85th': 19.4,
+    '95th': 22,
+  },
+  {
+    'age': 11,
+    '5th': 14.6,
+    '85th': 20.2,
+    '95th': 23.2,
+  },
+  {
+    'age': 12,
+    '5th': 15,
+    '85th': 21,
+    '95th': 24.2,
+  },
+  {
+    'age': 13,
+    '5th': 15.4,
+    '85th': 21.8,
+    '95th': 25.1,
+  },
+  {
+    'age': 14,
+    '5th': 16,
+    '85th': 22.6,
+    '95th': 26,
+  },
+  {
+    'age': 15,
+    '5th': 16.6,
+    '85th': 23.4,
+    '95th': 26.8,
+  },
+  {
+    'age': 16,
+    '5th': 17.2,
+    '85th': 24.2,
+    '95th': 27.5,
+  },
+  {
+    'age': 17,
+    '5th': 17.6,
+    '85th': 24.9,
+    '95th': 28.2,
+  },
+  {
+    'age': 18,
+    '5th': 18.2,
+    '85th': 25.6,
+    '95th': 28.9,
+  },
+  {
+    'age': 19,
+    '5th': 18.6,
+    '85th': 26.4,
+    '95th': 29.7,
+  },
+];
+
 class ResultPage extends StatelessWidget {
   const ResultPage({
     @required this.isMale,
@@ -24,11 +138,21 @@ class ResultPage extends StatelessWidget {
 
     var result = 'normal';
 
-    if (bmi >= 30)
-      result = 'obese';
-    else if (bmi >= 25)
-      result = 'overweight';
-    else if (bmi < 18.5) result = 'underweight';
+    if (age <= 19) {
+      // TODO: add genders
+      final data = boys.firstWhere((o) => o['age'] == age);
+      if (bmi >= data['95th'])
+        result = 'obese';
+      else if (bmi >= data['85th'])
+        result = 'overweight';
+      else if (bmi < data['5th']) result = 'underweight';
+    } else {
+      if (bmi >= 30)
+        result = 'obese';
+      else if (bmi >= 25)
+        result = 'overweight';
+      else if (bmi < 18.5) result = 'underweight';
+    }
 
     return Scaffold(
       appBar: widgets.CustomAppBar('YOUR RESULT'),

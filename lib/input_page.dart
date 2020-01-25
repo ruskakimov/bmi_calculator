@@ -19,13 +19,13 @@ class _InputPageState extends State<InputPage> {
 
   void _handleWeightChange(int change) {
     setState(() {
-      _weight = min(max(0, _weight + change), 200);
+      _weight = min(max(5, _weight + change), 200);
     });
   }
 
   void _handleAgeChange(int change) {
     setState(() {
-      _age = min(max(0, _age + change), 100);
+      _age = min(max(2, _age + change), 100);
     });
   }
 
@@ -65,7 +65,7 @@ class _InputPageState extends State<InputPage> {
                     child: HeightCard(
                       value: _height,
                       onChange: _handleHeightChange,
-                      min: 125,
+                      min: 80,
                       max: 225,
                     ),
                   ),
