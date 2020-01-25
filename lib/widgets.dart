@@ -82,11 +82,13 @@ class StepperCard extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.value,
+    this.unit,
     @required this.onChange,
   }) : super(key: key);
 
   final String title;
   final int value;
+  final String unit;
   final Function onChange;
 
   @override
@@ -99,7 +101,22 @@ class StepperCard extends StatelessWidget {
           children: <Widget>[
             Text(title, style: Theme.of(context).textTheme.body1),
             SizedBox(height: 2),
-            Text(value.toString(), style: Theme.of(context).textTheme.display1),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: <Widget>[
+                Text(value.toString(),
+                    style: Theme.of(context).textTheme.display1),
+                Text(
+                  unit ?? '',
+                  style: Theme.of(context)
+                      .textTheme
+                      .body1
+                      .copyWith(fontSize: 20, fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
             Expanded(child: Container()),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

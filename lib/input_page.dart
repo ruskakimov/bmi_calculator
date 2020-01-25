@@ -77,6 +77,7 @@ class _InputPageState extends State<InputPage> {
                           child: widgets.StepperCard(
                             title: 'WEIGHT',
                             value: _weight,
+                            unit: 'kg',
                             onChange: _handleWeightChange,
                           ),
                         ),
