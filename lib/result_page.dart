@@ -8,6 +8,117 @@ import 'colors.dart';
 // Data is from here
 // https://www.cdc.gov/healthyweight/assessing/bmi/childrens_bmi/about_childrens_bmi.html
 // bmi for 5, 85, 95 percentile
+const girls = [
+  {
+    'age': 2,
+    '5th': 14.4,
+    '85th': 18,
+    '95th': 19.1,
+  },
+  {
+    'age': 3,
+    '5th': 14,
+    '85th': 17.2,
+    '95th': 18.3,
+  },
+  {
+    'age': 4,
+    '5th': 13.7,
+    '85th': 16.8,
+    '95th': 18,
+  },
+  {
+    'age': 5,
+    '5th': 13.5,
+    '85th': 16.8,
+    '95th': 18.2,
+  },
+  {
+    'age': 6,
+    '5th': 13.4,
+    '85th': 17.1,
+    '95th': 18.8,
+  },
+  {
+    'age': 7,
+    '5th': 13.4,
+    '85th': 17.6,
+    '95th': 19.6,
+  },
+  {
+    'age': 8,
+    '5th': 13.5,
+    '85th': 18.3,
+    '95th': 20.6,
+  },
+  {
+    'age': 9,
+    '5th': 13.8,
+    '85th': 19.1,
+    '95th': 21.8,
+  },
+  {
+    'age': 10,
+    '5th': 14,
+    '85th': 20,
+    '95th': 23,
+  },
+  {
+    'age': 11,
+    '5th': 14.4,
+    '85th': 20.8,
+    '95th': 24,
+  },
+  {
+    'age': 12,
+    '5th': 14.8,
+    '85th': 21.7,
+    '95th': 25.2,
+  },
+  {
+    'age': 13,
+    '5th': 15.3,
+    '85th': 22.5,
+    '95th': 26.2,
+  },
+  {
+    'age': 14,
+    '5th': 15.8,
+    '85th': 23.3,
+    '95th': 27.2,
+  },
+  {
+    'age': 15,
+    '5th': 16.3,
+    '85th': 24,
+    '95th': 28.1,
+  },
+  {
+    'age': 16,
+    '5th': 16.8,
+    '85th': 24.6,
+    '95th': 28.9,
+  },
+  {
+    'age': 17,
+    '5th': 17.2,
+    '85th': 25.2,
+    '95th': 29.6,
+  },
+  {
+    'age': 18,
+    '5th': 17.5,
+    '85th': 25.6,
+    '95th': 30.3,
+  },
+  {
+    'age': 19,
+    '5th': 17.8,
+    '85th': 26.1,
+    '95th': 31,
+  },
+];
+
 const boys = [
   {
     'age': 2,
@@ -139,8 +250,7 @@ class ResultPage extends StatelessWidget {
     var result = 'normal';
 
     if (age <= 19) {
-      // TODO: add genders
-      final data = boys.firstWhere((o) => o['age'] == age);
+      final data = (isMale ? boys : girls).firstWhere((o) => o['age'] == age);
       if (bmi >= data['95th'])
         result = 'obese';
       else if (bmi >= data['85th'])
