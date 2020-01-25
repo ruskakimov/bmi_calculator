@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'bmi_icons.dart';
 
-class AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const AppBar(this.title, {Key key})
-      : preferredSize = const Size.fromHeight(90),
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar(this.title, {Key key})
+      : preferredSize = const Size.fromHeight(56),
         super(key: key);
 
   @override
@@ -14,19 +14,13 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).canvasColor,
-        boxShadow: [BoxShadow(blurRadius: 12)],
-      ),
-      constraints: BoxConstraints.expand(),
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 30),
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.title,
-        ),
+    return AppBar(
+      elevation: 10,
+      backgroundColor: BmiColors.blue1,
+      centerTitle: true,
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.title,
       ),
     );
   }

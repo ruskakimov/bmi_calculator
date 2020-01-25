@@ -26,7 +26,7 @@ class BMICalculator extends StatelessWidget {
         accentColor: BmiColors.blue3,
         primaryColor: BmiColors.pink,
         highlightColor: BmiColors.white,
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           title: TextStyle(
             fontSize: 16,
             color: BmiColors.white,
@@ -56,23 +56,21 @@ class BMICalculator extends StatelessWidget {
           ),
         ),
       ),
-      home: Stack(
-        children: <Widget>[
-          Image(
-            image: AssetImage('images/selector_page.png'),
-            alignment: Alignment.bottomCenter,
-            width: double.infinity,
-            fit: BoxFit.contain,
-          ),
-          Opacity(
-            opacity: 1,
-            child: Scaffold(
-              appBar: widgets.AppBar('BMI CALCULATOR'),
-              body: InputPage(),
-            ),
-          ),
-        ],
-      ),
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => InputPage(),
+        'result': (context) => ResultPage(),
+      },
+    );
+  }
+}
+
+class ResultPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: widgets.CustomAppBar('RESULT'),
+      body: Text('yo'),
     );
   }
 }

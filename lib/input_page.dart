@@ -36,66 +36,74 @@ class _InputPageState extends State<InputPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                SizedBox(height: 30),
-                Expanded(
-                  flex: 6,
-                  child: widgets.GenderSwitcher(
-                    male: _male,
-                    onSwitch: (male) {
-                      setState(() {
-                        _male = male;
-                      });
-                    },
+    return Scaffold(
+      appBar: widgets.CustomAppBar('BMI CALCULATOR'),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  SizedBox(height: 30),
+                  Expanded(
+                    flex: 6,
+                    child: widgets.GenderSwitcher(
+                      male: _male,
+                      onSwitch: (male) {
+                        setState(() {
+                          _male = male;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(height: 24),
-                Expanded(
-                  flex: 8,
-                  child: HeightCard(
-                    value: _height,
-                    onChange: _handleHeightChange,
-                    min: 125,
-                    max: 225,
+                  SizedBox(height: 24),
+                  Expanded(
+                    flex: 8,
+                    child: HeightCard(
+                      value: _height,
+                      onChange: _handleHeightChange,
+                      min: 125,
+                      max: 225,
+                    ),
                   ),
-                ),
-                SizedBox(height: 24),
-                Expanded(
-                  flex: 8,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: widgets.StepperCard(
-                          title: 'WEIGHT',
-                          value: _weight,
-                          onChange: _handleWeightChange,
+                  SizedBox(height: 24),
+                  Expanded(
+                    flex: 8,
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: widgets.StepperCard(
+                            title: 'WEIGHT',
+                            value: _weight,
+                            onChange: _handleWeightChange,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 5),
-                      Expanded(
-                        child: widgets.StepperCard(
-                          title: 'AGE',
-                          value: _age,
-                          onChange: _handleAgeChange,
+                        SizedBox(width: 5),
+                        Expanded(
+                          child: widgets.StepperCard(
+                            title: 'AGE',
+                            value: _age,
+                            onChange: _handleAgeChange,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 30),
-              ],
+                  SizedBox(height: 30),
+                ],
+              ),
             ),
           ),
-        ),
-        widgets.PrimaryButton('CALCULATE YOUR BMI'),
-      ],
+          widgets.PrimaryButton(
+            'CALCULATE YOUR BMI',
+            onPress: () {
+              Navigator.of(context).pushNamed('result');
+            },
+          ),
+        ],
+      ),
     );
   }
 }
