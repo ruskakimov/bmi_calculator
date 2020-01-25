@@ -65,7 +65,7 @@ class _InputPageState extends State<InputPage> {
                     child: HeightCard(
                       value: _height,
                       onChange: _handleHeightChange,
-                      min: 80,
+                      min: 125,
                       max: 225,
                     ),
                   ),
