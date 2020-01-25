@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bmi/result_page.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
@@ -100,7 +101,17 @@ class _InputPageState extends State<InputPage> {
           widgets.PrimaryButton(
             'CALCULATE YOUR BMI',
             onPress: () {
-              Navigator.of(context).pushNamed('result');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(
+                    isMale: _male,
+                    height: _height,
+                    weight: _weight,
+                    age: _age,
+                  ),
+                ),
+              );
             },
           ),
         ],
