@@ -20,6 +20,7 @@ class BMICalculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'BMI calculator',
       theme: ThemeData(
         canvasColor: BmiColors.blue1,
         cardColor: BmiColors.blue2,
