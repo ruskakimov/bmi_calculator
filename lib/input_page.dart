@@ -13,9 +13,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   bool _male = true;
-  int _weight = 74;
-  int _age = 19;
-  int _height = 175;
+  int _weight = 50;
+  int _age = 20;
+  int _height = 150;
 
   void _handleWeightChange(int change) {
     setState(() {
@@ -65,8 +65,8 @@ class _InputPageState extends State<InputPage> {
                     child: HeightCard(
                       value: _height,
                       onChange: _handleHeightChange,
-                      min: 125,
-                      max: 225,
+                      min: 100,
+                      max: 200,
                     ),
                   ),
                   SizedBox(height: 24),
