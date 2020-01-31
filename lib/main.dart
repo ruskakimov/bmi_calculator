@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import 'colors.dart';
 import 'input_page.dart';
-import 'result_page.dart';
 
 void main() {
   runApp(BMICalculator());
